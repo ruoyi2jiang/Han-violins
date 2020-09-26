@@ -1,0 +1,27 @@
+﻿@model HansViolinWebApp.Models.BusinessDetail
+
+@{
+    ViewData["Title"] = "About";
+    var sanitizer = new Ganss.XSS.HtmlSanitizer();
+}
+
+<div id="header-bg" class="header-visible"></div>
+
+<section id="about" class="title-padding">
+    <div class="container mb-5">
+        <div  data-aos="fade-up">
+            <div class="title">
+                <h2>About Us</h2>
+            </div>
+        </div>
+        <div class="mb-3" data-aos="fade-up" data-aos-delay="100">
+            <img src=@Model.ImageLink class="w-100"/>
+        </div>
+        <div  data-aos="fade-up" data-aos-delay="200">
+            <div class="mb-3">
+                @Html.Raw(sanitizer.Sanitize(Model.About))
+            </div>
+
+        </div>
+    </div>
+</section>

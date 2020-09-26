@@ -1,0 +1,16 @@
+﻿@model HansViolinWebApp.Models.BusinessDetail
+
+    <div class="social-links">
+        @if (Model.Twitter != null)
+        {
+            <a href=@Model.Twitter class="twitter"><i class="fa fa-twitter"></i></a>
+        }
+        @if (Model.Facebook != null)
+        {
+            <a href=@Model.Facebook class="facebook"><i class="fa fa-facebook"></i></a>
+        }
+        @if (Model.Instagram != null)
+        {
+            <a href=@Model.Instagram class="instagram"><i class="fa fa-instagram"></i></a>
+        }
+    </div>

@@ -1,0 +1,37 @@
+﻿@model HansViolinWebApp.Models.Item
+
+<div class="modal fade" id="editCover">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="editCoverLabel">Choose Cover</h4>
+            </div>
+            <div class="modal-body">
+                <div>Set this image as cover?</div>
+                <div class="row">
+                    <div>
+                        <form asp-action="EditItemCover">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="ItemId" />
+                            <input type="hidden" asp-for="CategoryId" />
+                            <input type="hidden" asp-for="CategoryName" />
+                            <input type="hidden" asp-for="ItemName" />
+                            <input type="hidden" asp-for="Description" />
+                            <input type="hidden" asp-for="PriceRange" />
+                            <input type="hidden" asp-for="CoverId" />
+                            <input type="hidden" asp-for="OriginInfo" />
+                            <input type="hidden" asp-for="Status" />
+                            <input type="hidden" asp-for="DateAdded" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" data-save="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

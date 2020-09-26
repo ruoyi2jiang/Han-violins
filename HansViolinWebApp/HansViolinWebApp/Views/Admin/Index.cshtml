@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<div id="header-bg" class="header-visible"></div>
+
+<div id="PlaceHolderHere"></div>
+
+<div class="content-container container" id="admin-panel">
+    <h1>Admin Panel</h1>
+
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-news-tab" data-toggle="tab" href="#nav-news" role="tab" aria-controls="nav-news" aria-selected="true">News</a>
+            <a class="nav-item nav-link" id="nav-instrument-tab" data-toggle="tab" href="#nav-instrument" role="tab" aria-controls="nav-instrument" aria-selected="false">Instruments</a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Business Profile</a>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-news" role="tabpanel" aria-labelledby="nav-news-tab">
+            <ul class="nav nav-pills tag-group justify-content-center mt-2" id="pills-tab" role="tablist">
+                <li class="nav-item tag-item p-0">
+                    <a class="nav-link active" id="pills-publish-tab" data-toggle="pill" href="#pills-publish" role="tab" aria-controls="pills-publish" aria-selected="true">Published</a>
+                </li>
+                <li class="nav-item tag-item p-0">
+                    <a class="nav-link" id="pills-draft-tab" data-toggle="pill" href="#pills-draft" role="tab" aria-controls="pills-draft" aria-selected="false">Draft</a>
+                </li>
+            </ul>
+            <div class="tab-content " id="pills-tabContent">
+                <a asp-controller="admin" asp-action="CreatePost" class="btn btn-small ml-4">Create New</a>
+
+                <div class="tab-pane fade show active " id="pills-publish" role="tabpanel" aria-labelledby="pills-publish-tab">
+                    <div id="news-manager-publish" class="admin-panel-container">@await Component.InvokeAsync("NewsManager", true)</div>
+                </div>
+                <div class="tab-pane fade " id="pills-draft" role="tabpanel" aria-labelledby="pills-draft-tab">
+                    <div id="news-manager-draft" class="admin-panel-container">@await Component.InvokeAsync("NewsManager", false)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="nav-instrument" role="tabpanel" aria-labelledby="nav-instrument-tab">
+            <div id="instrument-list" class="admin-panel-container">@await Component.InvokeAsync("CategoryList")</div>
+        </div>
+
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <div id="business-profile" class="admin-panel-container">@await Component.InvokeAsync("BusinessProfile")</div>
+        </div>
+
+    </div>
+
+
+</div>
+
+

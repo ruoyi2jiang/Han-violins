@@ -1,0 +1,60 @@
+﻿@model HansViolinWebApp.Models.Item
+
+@{
+    ViewData["Title"] = Model.ItemName;
+}
+
+<div id="header-bg" class="header-visible"></div>
+
+<section id="breadcrumbs" class="breadcrumbs">
+    <div class="container"></div>
+    <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+            <h2> </h2>
+            <ol>
+                <li><a asp-controller="home" asp-action="index">Home</a></li>
+                @if (Model.Status == Status.NOTABLE_SALE.ToString())
+                {
+                    <li><a asp-area="" asp-controller="instruments" asp-action="NotableSales">Notable Sales</a></li>
+                }
+                else
+                {
+                    <li><a asp-controller="instruments" asp-action="categorize" asp-route-pathName=@Model.CategoryName>@ViewBag.Category</a></li>
+                }
+                <li style="color: #EB5552">@Model.ItemName</li>
+            </ol>
+        </div>
+
+    </div>
+</section><!-- End Breadcrumbs -->
+
+<section id="portfolio-details" class="portfolio-details">
+    <div class="content-wrapper mb-5">
+        <div class="instrument-content mx-3" data-aos="fade-up">
+            <div class="title" >
+                <h3>@Model.ItemName</h3>
+            </div>
+            <div class="addition-info">@Model.OriginInfo</div>
+            <div class="text-content">£@Model.PriceRange</div>
+            <div class="mt-4 text-content newline-wrapper">@Model.Description</div>
+        </div>
+        <div class="instrument-content mx-3" data-aos="fade-up" data-aos-delay="100">
+            <div class="portfolio-details-container">
+                <div class="owl-carousel portfolio-details-carousel">
+                    @foreach (var image in Model.Images)
+                    {
+                        var url = "../" + image.Url;
+                        <img src=@url class="img-fluid" alt="">
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section><!-- End Portfolio Details Section -->
+
+
+
+
+

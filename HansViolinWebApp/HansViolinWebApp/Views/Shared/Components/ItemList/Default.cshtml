@@ -1,0 +1,129 @@
+﻿@model IEnumerable<HansViolinWebApp.Models.Item>
+
+
+<div class="accordion" id="itemList">
+    @foreach (var item in Model)
+    {
+        <div class="card">
+            <div class="card-header" id="@item.ItemName">
+                <div class="container-title">
+                    @if (item.Status == Status.ACTIVE.ToString())
+                    {
+                        <button class="active-vl" data-toggle="tooltip" data-placement="bottom" title="Active"></button>
+                    }
+                    else if (item.Status == Status.NOTABLE_SALE.ToString())
+                    {
+                        <button class="sold-vl" data-toggle="tooltip" data-placement="bottom" title="Notable sales"></button>
+                    }
+                    else
+                    {
+                        <button class="draft-vl" data-toggle="tooltip" data-placement="bottom" title="Draft"></button>
+                    }
+                    <button class="btn btn-link admin-sub-header" type="button" data-toggle="collapse" data-target="#item-@item.ItemId" aria-expanded="false" aria-controls="item-@item.ItemId">
+                        @item.ItemName
+                    </button>
+                    <div class="container-action">
+                        <button type="button" class="btn-small" data-toggle="ajax-modal" data-target="#editItem"
+                                data-url="@Url.Action($"EditItem/{item.ItemId}")">
+                            Edit
+                        </button>
+                        <button type="button" class="btn-small" data-toggle="ajax-modal" data-target="#deleteItem"
+                                data-url="@Url.Action($"DeleteItem/{item.ItemId}")">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="item-@item.ItemId" class="collapse" aria-labelledby="@item.ItemName" data-parent="#itemList">
+                <div class="card-body">
+                    <div class="category-container">
+                        <div class="admin-sub-container">
+                            <div class="mb-5">
+                                <div><strong>@Html.DisplayNameFor(model => model.Description)</strong></div>
+                                <div class="newline-wrapper">@Html.DisplayFor(modelItem => item.Description)</div>
+                            </div>
+                            <div class="flex-box mb-5">
+                                <div class="mr-5 pr-5">
+                                    <div>
+                                        <div><strong>Price Range</strong></div>
+                                        <div>@Html.DisplayFor(modelItem => item.PriceRange)</div>
+                                    </div>
+                                    <div>
+                                        <div><strong>Origin / Year (Additional info)</strong></div>
+                                        <div>@Html.DisplayFor(modelItem => item.OriginInfo)</div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <div><strong>Date Added</strong></div>
+                                        <div>@item.DateAdded.Value.Date.ToString("dd/MM/yyyy")</div>
+                                    </div>
+                                    <div>
+                                        <div><strong>@Html.DisplayNameFor(model => model.Status)</strong></div>
+                                        <div>@Html.DisplayFor(modelItem => item.Status)</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex-box mb-3">
+                                    <div class="mr-5"><strong>Images</strong></div>
+                                    <div>
+                                        <button type="button" class="btn-small ml-5" data-toggle="ajax-modal" data-target="#addImage"
+                                                data-url="@Url.Action("CreateImage", new {itemId = item.ItemId})">
+                                            Add Image
+                                        </button>
+                                    </div>
+                                    
+                                </div>
+                                
+                                <div class="flex-box">
+                                    @foreach (var image in item.Images)
+                                    {
+                                        <div class="admin-image-container m-3">
+                                            @if (image.ImageId == item.CoverId)
+                                            {
+                                            <div>
+                                                <img class="admin-table-image selected" src=@image.Url />
+                                                <button type="button" class="btn-x" data-toggle="ajax-modal" data-target="#deleteImage"
+                                                        data-url="@Url.Action($"DeleteImage/{image.ImageId}")">
+                                                    X
+                                                </button>
+                                            </div>
+                                            }
+                                            else
+                                            {
+                                            <div>
+                                                <img class="admin-table-image" src=@image.Url />
+                                                <button type="button" class="btn-x" data-toggle="ajax-modal" data-target="#deleteImage"
+                                                        data-url="@Url.Action($"DeleteImage/{image.ImageId}")">
+                                                    X
+                                                </button>
+                                            </div>
+                                            <div>
+                                                <button type="button" class="btn-small w-100" data-toggle="ajax-modal" data-target="#editCover"
+                                                        data-url="@Url.Action($"EditItemCover/{item.ItemId}", new {coverId = image.ImageId})">
+                                                    Set Cover
+                                                </button>
+                                            </div>
+                                            }
+                                            
+                                        </div>
+                                    }
+                                </div>
+                                
+                                
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+<button type="button" class="btn-secondary big-button" data-toggle="ajax-modal" data-target="#addItem"
+        data-url="@Url.Action("CreateItem", new {categoryId = ViewBag.Category})">
+    Add New Instrument
+</button>

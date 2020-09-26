@@ -1,0 +1,101 @@
+﻿@model IEnumerable<HansViolinWebApp.Models.Item>
+
+@{
+    ViewData["Title"] = "Notable Sales";
+}
+
+<div id="header-bg" class="header-visible"></div>
+
+<section id="portfolio" class="portfolio title-padding">
+    <div class="container mb-5" data-aos="fade-up">
+        <div>
+            <div class="title">
+                <h2>Notable Sales</h2>
+            </div>
+        </div>
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-lg-12 d-flex justify-content-center">
+                <ul id="portfolio-flters">
+                    <li data-filter="*" class="filter-active">All</li>
+                    @foreach (var category in ViewBag.Categories)
+                    {
+                        <li data-filter=".filter-@category.PathName">@category.CategoryName</li>
+                    }
+
+                    <!--Test Tags-->
+                    <li data-filter=".filter-app">Category 2</li>
+                    <li data-filter=".filter-card">Category 3</li>
+                    <li data-filter=".filter-web">Category 4</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+            @foreach (var item in Model)
+            {
+            <div class="col-lg-4 col-md-6 portfolio-item filter-@item.CategoryName">
+                <a asp-area="" asp-controller="instruments" asp-action="detail" asp-route-id="@item.ItemId">
+                    <div class="instrument-cover">
+                        @{
+                            var image = item.Images.Where(i => i.ImageId == item.CoverId).FirstOrDefault();
+                            var url = image == null ? "#" : image.Url;
+                        }
+                        <img src=@url class="img-fluid" alt="">
+                    </div>
+                    <div class="instrument-heading">
+                        <div class="heading">@item.ItemName</div>
+                    </div>
+                </a>
+            </div>
+            }
+
+            <!--Test Cards-->
+            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                <div class="portfolio-wrap">
+                    <img src="#" class="img-fluid" alt="">
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                <div class="portfolio-wrap">
+                    <img src="#" class="img-fluid" alt="">
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                <div class="portfolio-wrap">
+                    <img src="#" class="img-fluid" alt="">
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                <div class="portfolio-wrap">
+                    <img src="#" class="img-fluid" alt="">
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                <div class="portfolio-wrap">
+                    <img src="#" class="img-fluid" alt="">
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                <div class="portfolio-wrap">
+                    <img src="#" class="img-fluid" alt="">
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                <div class="portfolio-wrap">
+                    <img src="#" class="img-fluid" alt="">
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                <div class="portfolio-wrap">
+                    <img src="#" class="img-fluid" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- End Portfolio Details Section -->

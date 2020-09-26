@@ -1,0 +1,146 @@
+﻿
+
+.image-fill {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.description-wrapper {
+    margin: 10px;
+    padding: 20px 20px 0 20px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 18px;
+    font-family: "Raleway", sans-serif;
+    overflow: hidden;
+}
+.content-wrapper {
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: center;
+}
+
+.instrument-container {
+    display: block;
+    width: 400px;
+    max-width: 80%;
+}
+
+.title-padding {
+    padding-top: 120px;
+}
+
+@media (max-width: 991px) {
+    .title-padding {
+        padding-top: 100px;
+    }
+}
+
+.title {
+    margin-bottom: 10px;
+}
+
+.addition-info {
+    font-style:italic;
+    color: gray;
+}
+
+.text-content {
+    line-height:24px;
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+
+.instrument-content {
+    display: block;
+    width: 550px;
+    max-width: 80%;
+}
+
+.instrument-image {
+    width: 100%;
+    height: auto;
+}
+
+
+.tab-image {
+    width:100%;
+    height: 100%;
+    object-fit : cover;
+}
+
+.active-image {
+    opacity: 1 !important;
+}
+
+.instrument-heading {
+    padding: 5px 0px;
+    text-align: center;
+}
+
+.image-tabs {
+    display: flex;
+    flex-wrap: wrap;
+}
+/*
+ * Extra utilities
+ */
+
+/* The grid: Four equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 10em;
+    height: 5em;
+    max-width: 25%;
+    padding: 0px;
+}
+
+    /* Style the images inside the grid */
+    .column img {
+        opacity: 0.3;
+        cursor: pointer;
+    }
+
+        .column img:hover {
+            opacity: 1;
+        }
+        .column img:checked {
+            opacity: 1;
+        }
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+.flex-equal > * {
+    -ms-flex: 1;
+    -webkit-box-flex: 1;
+    flex: 1;
+}
+
+@media (min-width: 768px) {
+    .flex-md-equal > * {
+        -ms-flex: 1;
+        -webkit-box-flex: 1;
+        flex: 1;
+    }
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}

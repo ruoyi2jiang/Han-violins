@@ -1,0 +1,8 @@
+﻿@model IEnumerable<HansViolinWebApp.Models.Category>
+
+    <ul>
+        @foreach (var category in Model)
+        {
+            <li><a asp-controller="instruments" asp-action="categorize" asp-route-pathName=@category.PathName>@category.CategoryName</a></li>
+        }
+    </ul>

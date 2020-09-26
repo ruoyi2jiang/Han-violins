@@ -1,0 +1,75 @@
+﻿@model HansViolinWebApp.Models.News
+
+@{
+    ViewData["Title"] = "News Preview";
+    var sanitizer = new Ganss.XSS.HtmlSanitizer();
+    sanitizer.AllowedCssProperties.Add("flex-wrap");
+    sanitizer.AllowedCssProperties.Add("justify-content");
+
+    var date = Model.PublishedDate != null ? Model.PublishedDate : Model.CreatedDate;
+}
+
+<div id="header-bg" class="header-visible"></div>
+
+<div class="container title-padding" id="admin-panel">
+    <div class="news-container">
+        <div class="d-flex justify-content-center">
+            <span class="mr-1">
+                <a asp-action="EditPost" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
+            </span>
+            <form asp-action="DeletePost">
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <span>
+                        <input type="submit" value="Confirm Delete" class="btn btn-secondary" />
+                    </span>
+                </div>
+            </form>
+        </div>
+        <div class="title">
+            <h3>@Model.Title</h3>
+            <hr />
+        </div>
+        <div class="mb-5 addition-info">
+            @{
+                var status = Model.IsPublished ? "Published" : "Draft";
+            }
+            @date.Value.Date.ToString("dd MMM yyyy") @status
+        </div>
+        <div>
+            <div class="news-content mb-5">
+                @Html.Raw(sanitizer.Sanitize(Model.Content))
+            </div>
+        </div>
+    </div>
+    
+</div>
+<div class="d-flex justify-content-center my-5">
+    <span class="mr-1">
+        <a asp-action="Index" class="btn btn-secondary">Back</a>
+    </span>
+
+   
+    <form asp-action="UpdatePostStatus">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="Title" />
+        <input type="hidden" asp-for="Content" />
+        <input type="hidden" asp-for="CreatedDate" />
+        <input type="hidden" asp-for="PublishedDate" />
+        <input type="hidden" asp-for="IsPublished" />
+        <div class="form-group">
+            <span>
+                @if (!Model.IsPublished)
+                {
+                    <input type="submit" value="Publish" class="btn btn-primary" />
+                }
+                else
+                {
+                    <input type="submit" value="Unpublish" class="btn btn-primary" />
+                }
+            </span>
+        </div>
+    </form>
+
+</div>

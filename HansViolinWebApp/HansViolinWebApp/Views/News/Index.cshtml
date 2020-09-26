@@ -1,0 +1,44 @@
+﻿@model IEnumerable<HansViolinWebApp.Models.News>
+
+@{
+    ViewData["Title"] = "News";
+}
+
+<div id="header-bg" class="header-visible"></div>
+
+<section id="news-manager">
+    <div class=" container mb-5 title-padding">
+        <div class="mb-3" data-aos="fade-up">
+            <div class="title">
+                <h2>News</h2>
+                <hr />
+            </div>
+        </div>
+        <div class="news-container" data-aos="fade-up" data-aos-delay="100">
+            <div class="my-3 text-center">
+                @if (Model.Count() == 0)
+                {
+                    <p>No post available</p>
+                }
+            </div>
+            @foreach (var post in Model)
+            {
+                <div class="row">
+                    <div class="d-flex col-lg-12 my-3">
+                        @if (post.PublishedDate!=null)
+                        {
+                            <div class="col-lg-3 news-time">@post.PublishedDate.Value.Date.ToString("dd MMM yyyy")</div>
+                        }
+                        else
+                        {
+                            <div class="col-lg-3 news-time" style="color:red">Published date error!!</div>
+                        }
+                        <div class="col-lg-9 news-list">
+                            <a asp-area="" asp-controller="news" asp-action="GetNews" asp-route-id="@post.Id">@post.Title</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section><!-- End News Manager Section -->

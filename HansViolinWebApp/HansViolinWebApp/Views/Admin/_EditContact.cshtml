@@ -1,0 +1,63 @@
+﻿@model HansViolinWebApp.Models.BusinessDetail
+
+
+<div class="modal fade" id="editProfile">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="editProfileLabel">Edit Contact</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form asp-action="EditContact">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="Id" />
+                            <input type="hidden" asp-for="About" />
+                            <input type="hidden" asp-for="ImageLink" />
+                            <div class="form-group">
+                                <label asp-for="Phone" class="control-label"></label>
+                                <input asp-for="Phone" class="form-control" />
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Email" class="control-label"></label>
+                                <input asp-for="Email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Address" class="control-label"></label>
+                                <textarea rows="3" asp-for="Address" class="form-control">@Model.Address</textarea>
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Postcode" class="control-label"></label>
+                                <input asp-for="Postcode" class="form-control" />
+                                <span asp-validation-for="Postcode" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Twitter" class="control-label"></label>
+                                <input asp-for="Twitter" class="form-control" />
+                                <span asp-validation-for="Twitter" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Facebook" class="control-label"></label>
+                                <input asp-for="Facebook" class="form-control" />
+                                <span asp-validation-for="Facebook" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Instagram" class="control-label"></label>
+                                <input asp-for="Instagram" class="form-control" />
+                                <span asp-validation-for="Instagram" class="text-danger"></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" data-save="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

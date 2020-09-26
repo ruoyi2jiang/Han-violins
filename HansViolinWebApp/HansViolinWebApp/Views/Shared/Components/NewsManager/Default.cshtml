@@ -1,0 +1,38 @@
+﻿@model IEnumerable<HansViolinWebApp.Models.News>
+
+
+<section id="news-manager">
+    <div class="my-5">
+        <div class="row">
+            
+        </div>
+        <div class="news-container">
+            @foreach (var post in Model)
+            {
+                var filter = post.IsPublished ? "published" : "draft";
+                <div class="row ">
+                    <div class="d-flex col-lg-12">
+                        @if (post.IsPublished)
+                        {
+                            <div class="col-lg-2">@post.PublishedDate.Value.Date.ToString("dd MMM yyyy")</div>
+                        }
+                        else
+                        {
+                            <div class="col-lg-2" style="color:lightgray">@post.CreatedDate.Date.ToString("dd MMM yyyy")</div>
+                        }
+                        <div class="col-lg-8 news-list">
+                            <a asp-area="" asp-controller="admin" asp-action="NewsPreview" asp-route-id="@post.Id">@post.Title</a>
+                        </div>
+                        <div class="col-lg-2">
+                            <span><a class="btn btn-small" asp-controller="admin" asp-action="EditPost" asp-route-id="@post.Id">Edit</a></span>
+                            <button type="button" class="btn-small" data-toggle="ajax-modal" data-target="#deletePost"
+                                    data-url="@Url.Action($"DeletePost/{post.Id}")">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section><!-- End News Manager Section -->

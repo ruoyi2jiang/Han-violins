@@ -1,0 +1,24 @@
+﻿@model HansViolinWebApp.Models.Category
+
+<div class="modal fade" id="deleteCategory">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="deleteCategoryLabel">Delete Category</h4>
+            </div>
+            <div class="modal-body">
+                <div>Delete <strong>@Model.CategoryName</strong> and its instruments (including sold ones)?</div>
+                <form asp-action="DeleteCategory">
+                    <div class="form-group">
+                        <input type="hidden" asp-for="CategoryId" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" data-save="modal">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+

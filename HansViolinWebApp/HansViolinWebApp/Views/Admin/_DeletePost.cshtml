@@ -1,0 +1,23 @@
+﻿@model HansViolinWebApp.Models.News
+
+    <div class="modal fade" id="deletePost">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="deletePostLabel">Delete Post</h4>
+                </div>
+                <div class="modal-body">
+                    <div>Delete <strong>@Model.Title</strong>?</div>
+                    <form asp-action="DeletePost">
+                        <div class="form-group">
+                            <input type="hidden" asp-for="Id" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-save="modal">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,68 @@
+﻿@model HansViolinWebApp.Models.BusinessDetail
+
+@{ 
+    var sanitizer = new Ganss.XSS.HtmlSanitizer();
+}
+
+<div class="admin-sub-container">
+    <div class="flex-box mb-3">
+        <h2 class="mr-3 mb-0">About Us</h2>
+        <button type="button" class="btn-small" data-toggle="ajax-modal" data-target="#editProfile"
+                data-url="@Url.Action("EditProfile")">
+            Edit
+        </button>
+    </div>
+
+    <div>
+        <div><strong>Image</strong></div>
+        <div class="mb-3">
+            <img src=@Model.ImageLink class="w-25" />
+        </div>
+    </div>
+    <div>
+        <div><strong>Content (HTML tags allowed)</strong></div>
+        <div>@Html.Raw(sanitizer.Sanitize(Model.About))</div>
+    </div>
+</div>
+
+<div class="admin-sub-container">
+    <div class="flex-box mb-3">
+        <h2 class="mr-3 mb-0">Contact</h2>
+        <button type="button" class="btn-small" data-toggle="ajax-modal" data-target="#editProfile"
+                data-url="@Url.Action("EditContact")">
+            Edit
+        </button>
+    </div>
+    <div>
+        <div>
+            <span><strong>Phone</strong></span>
+            <span>@Model.Phone</span>
+        </div>
+        <div>
+            <span><strong>Email</strong></span>
+            <span>@Model.Email</span>
+        </div>
+        <div>
+            <span><strong>Address</strong></span>
+            <span>@Model.Address</span>
+        </div>
+        <div>
+            <span><strong>Postcode</strong></span>
+            <span>@Model.Postcode</span>
+        </div>
+        <div>
+            <span><strong>Twitter</strong></span>
+            <span>@Model.Twitter</span>
+        </div>
+        <div>
+            <span><strong>Facebook</strong></span>
+            <span>@Model.Facebook</span>
+        </div>
+        <div>
+            <span><strong>instagram</strong></span>
+            <span>@Model.Instagram</span>
+        </div>
+    </div>
+
+</div>
+

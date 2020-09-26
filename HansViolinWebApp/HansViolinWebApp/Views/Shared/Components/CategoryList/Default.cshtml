@@ -1,0 +1,50 @@
+﻿@model IEnumerable<HansViolinWebApp.Models.Category>
+
+    <div class="py-3">
+        <div class="text-center" style="color:red"><strong>**Please create in the order you want to display! We don't have the function to swap the order yet!**</strong></div>
+        <div class="text-center"><strong>Main Web Display Order:</strong> Categories - Ascending &#8195; Instruments - Descending &#8195; Images - Ascending</div>
+        <div class="text-center"><strong>Instrument Status colour:</strong> Active - Purple &#8195; Notable Sales - Red &#8195; Draft - Gray</div>
+    </div>
+
+<button type="button" class="btn-secondary big-button" data-toggle="ajax-modal" data-target="#addCategory"
+        data-url="@Url.Action("CreateCategory")">
+    Add New Category
+</button>
+
+<div class="accordion" id="categoryList">
+    @foreach (var category in Model)
+    {
+        <div class="card">
+            <div class="card-header" id="@category.CategoryName">
+                <div class="container-title">
+                    <img class="header-image" src=@category.CoverUrl />
+                    <button class="btn btn-link admin-card-header" type="button" data-toggle="collapse" data-target="#category-@category.CategoryId" aria-expanded="false" aria-controls="category-@category.CategoryId">
+                        @category.CategoryName
+                    </button>
+                    <div class="container-action">
+                        <button type="button" class="btn-small" data-toggle="ajax-modal" data-target="#editCategory"
+                                data-url="@Url.Action($"EditCategory/{category.CategoryId}")">
+                            Edit
+                        </button>
+                        <button type="button" class="btn-small" data-toggle="ajax-modal" data-target="#deleteCategory"
+                                data-url="@Url.Action($"DeleteCategory/{category.CategoryId}")">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="category-@category.CategoryId" class="collapse show" aria-labelledby="@category.CategoryName" data-parent="#categoryList">
+                <div class="card-body">
+                    <div class="category-container">
+                        <div class="admin-sub-container newline-wrapper">@category.Description</div>
+                        @await Component.InvokeAsync("ItemList", category.CategoryId)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+
+
