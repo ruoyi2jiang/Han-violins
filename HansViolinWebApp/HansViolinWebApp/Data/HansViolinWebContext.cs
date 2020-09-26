@@ -1,8 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using HansViolinWebApp.Models;
 
-namespace HansViolinWebApp.Models
+namespace HansViolinWebApp.Data
 {
     public partial class HansViolinWebContext : DbContext
     {

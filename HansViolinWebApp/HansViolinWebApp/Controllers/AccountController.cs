@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Web.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
+using HansViolinWebApp.Data;
 
 namespace HansViolinWebApp.Controllers
 {

@@ -4,6 +4,7 @@ using HansViolinWebApp.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using HansViolinWebApp.Data;
 
 namespace HansViolinWebApp.ViewComponents
 {

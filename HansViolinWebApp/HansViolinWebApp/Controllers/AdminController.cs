@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HansViolinWebApp.Data;
 using HansViolinWebApp.Models;
 using HansViolinWebApp.Models.Repository;
 using Microsoft.AspNetCore.Authorization;

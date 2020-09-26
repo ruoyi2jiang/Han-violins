@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using HansViolinWebApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using HansViolinWebApp.Data;
 
 namespace HansViolinWebApp.ViewComponents
 {

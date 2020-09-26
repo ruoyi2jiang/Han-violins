@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using HansViolinWebApp.Models;
+using HansViolinWebApp.Data;
 
 namespace HansViolinWebApp.Controllers
 {
