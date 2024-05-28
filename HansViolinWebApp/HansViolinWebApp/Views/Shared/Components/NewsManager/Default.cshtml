@@ -20,10 +20,11 @@
                         {
                             <div class="col-lg-2" style="color:lightgray">@post.CreatedDate.Date.ToString("dd MMM yyyy")</div>
                         }
-                        <div class="col-lg-8 news-list">
+                        <div class="col-lg-7 news-list">
                             <a asp-area="" asp-controller="admin" asp-action="NewsPreview" asp-route-id="@post.Id">@post.Title</a>
                         </div>
-                        <div class="col-lg-2">
+                        <div class="col-lg-3">
+                            <span><a class="btn btn-small" asp-controller="admin" asp-action="EditPostTranslation" asp-route-id="@post.Id">翻译</a></span>
                             <span><a class="btn btn-small" asp-controller="admin" asp-action="EditPost" asp-route-id="@post.Id">Edit</a></span>
                             <button type="button" class="btn-small" data-toggle="ajax-modal" data-target="#deletePost"
                                     data-url="@Url.Action($"DeletePost/{post.Id}")">

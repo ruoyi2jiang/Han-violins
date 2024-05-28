@@ -1,101 +1,83 @@
-﻿@model IEnumerable<HansViolinWebApp.Models.Item>
+﻿
+@using Microsoft.AspNetCore.Localization
+@using HansViolinWebApp.Resources
+
+@inject LocalizationService Localizer
+@model IEnumerable<HansViolinWebApp.Models.Item>
 
 @{
-    ViewData["Title"] = "Notable Sales";
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    ViewData["Title"] = Localizer.Localize("notable-sales");
+    Layout = "~/Views/Shared/_InnerLayout.cshtml";
 }
-
-<div id="header-bg" class="header-visible"></div>
 
 <section id="portfolio" class="portfolio title-padding">
     <div class="container mb-5" data-aos="fade-up">
         <div>
             <div class="title">
-                <h2>Notable Sales</h2>
+                <h2>@Localizer.Localize("notable-sales")</h2>
             </div>
         </div>
+        <!--
         <div class="row" data-aos="fade-up" data-aos-delay="100">
             <div class="col-lg-12 d-flex justify-content-center">
                 <ul id="portfolio-flters">
-                    <li data-filter="*" class="filter-active">All</li>
+                    <li data-filter="*" class="filter-active">@Localizer.Localize("all")</li>
                     @foreach (var category in ViewBag.Categories)
                     {
                         <li data-filter=".filter-@category.PathName">@category.CategoryName</li>
                     }
 
-                    <!--Test Tags-->
-                    <li data-filter=".filter-app">Category 2</li>
-                    <li data-filter=".filter-card">Category 3</li>
-                    <li data-filter=".filter-web">Category 4</li>
                 </ul>
             </div>
         </div>
         <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
             @foreach (var item in Model)
             {
-            <div class="col-lg-4 col-md-6 portfolio-item filter-@item.CategoryName">
-                <a asp-area="" asp-controller="instruments" asp-action="detail" asp-route-id="@item.ItemId">
-                    <div class="instrument-cover">
-                        @{
-                            var image = item.Images.Where(i => i.ImageId == item.CoverId).FirstOrDefault();
-                            var url = image == null ? "#" : image.Url;
-                        }
-                        <img src=@url class="img-fluid" alt="">
-                    </div>
-                    <div class="instrument-heading">
-                        <div class="heading">@item.ItemName</div>
-                    </div>
-                </a>
-            </div>
+                <div class="col-lg-4 col-md-6 portfolio-item filter-@item.CategoryName">
+                    <a asp-area="" asp-controller="instruments" asp-action="detail" asp-route-id="@item.ItemId">
+                        <div class="instrument-cover">
+                            @{
+                                var image = item.Images.Where(i => i.ImageId == item.CoverId).FirstOrDefault();
+                                var url = image == null ? "#" : image.Url;
+                            }
+                            <img src=@url class="img-fluid" alt="">
+                        </div>
+                        <div class="instrument-heading">
+                            @if (requestCulture.RequestCulture.Culture.Name == "zh")
+                            {
+                                <div class="heading">@item.ItemNameZh</div>
+                            }
+                            else
+                            {
+                                <div class="heading">@item.ItemName</div>
+                            }
+                        </div>
+                    </a>
+                </div>
             }
 
-            <!--Test Cards-->
-            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                <div class="portfolio-wrap">
-                    <img src="#" class="img-fluid" alt="">
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                <div class="portfolio-wrap">
-                    <img src="#" class="img-fluid" alt="">
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-                <div class="portfolio-wrap">
-                    <img src="#" class="img-fluid" alt="">
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                <div class="portfolio-wrap">
-                    <img src="#" class="img-fluid" alt="">
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                <div class="portfolio-wrap">
-                    <img src="#" class="img-fluid" alt="">
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-                <div class="portfolio-wrap">
-                    <img src="#" class="img-fluid" alt="">
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-                <div class="portfolio-wrap">
-                    <img src="#" class="img-fluid" alt="">
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                <div class="portfolio-wrap">
-                    <img src="#" class="img-fluid" alt="">
-                </div>
-            </div>
-        </div>
+        </div>-->
+    <div class="row py-3" data-aos="fade-up" data-aos-delay="100">
+        <table class="table table-striped table-bordered">
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        @if (requestCulture.RequestCulture.Culture.Name == "zh")
+                        {
+                            <td>@item.Category.CategoryNameZh</td>
+                            <td>@item.SoldinfoZh</td>
+                        }
+                        else
+                        {
+                            <td>@item.Category.CategoryName</td>
+                            <td>@item.SoldInfo</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
     </div>
 </section><!-- End Portfolio Details Section -->

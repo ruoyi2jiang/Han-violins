@@ -10,8 +10,10 @@ namespace HansViolinWebApp.Models
         [Required]
         [StringLength(250)]
         public string Title { get; set; }
+        public string TitleZh { get; set; }
 
         public string Content { get; set; }
+        public string ContentZh { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? PublishedDate { get; set; }
         public bool IsPublished { get; set; }

@@ -1,0 +1,101 @@
+﻿@using HansViolinWebApp.Resources
+
+@inject LocalizationService Localizer
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - @Localizer.Localize("han-violins")</title>
+    <meta content="" name="descriptison">
+    <meta content="" name="keywords">
+
+    <!-- Facebook Opengraph integration: https://developers.facebook.com/docs/sharing/opengraph -->
+    <meta property="og:title" content="">
+    <meta property="og:image" content="">
+    <meta property="og:url" content="">
+    <meta property="og:site_name" content="">
+    <meta property="og:description" content="">
+
+    <!-- Favicons -->
+    <link href="~/favicon.png" rel="icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Vollkorn+SC:wght@400;600&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Long+Cang&family=Noto+Serif+SC:wght@400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <link href="~/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="~/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/vendor/owl.carousel/assets/owl.theme.default.min.css" rel="stylesheet">
+    <link href="~/vendor/venobox/venobox.css" rel="stylesheet">
+    <link href="~/vendor/aos/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site2.css" />
+    <link rel="stylesheet" href="~/css/instrument.css" />
+</head>
+<body>
+
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="header-fixed">
+
+        <div class="container d-flex align-items-center">
+
+            <a asp-area="" asp-controller="home" asp-action="index" class="logo mr-auto"><img src="~/img/Logo2.png" alt="logo"></a>
+
+            <nav class="nav-menu d-none d-lg-block mr-auto">
+                <ul>
+                    <li class="drop-down">
+                        <a href="#">@Localizer.Localize("instruments-bows")</a>
+                        @await Component.InvokeAsync("DropDownMenu")
+                    </li>
+                    <li><a asp-area="" asp-controller="instruments" asp-action="NotableSales">@Localizer.Localize("notable-sales")</a></li>
+                    <li><a asp-area="" asp-controller="news" asp-action="index">@Localizer.Localize("news")</a></li>
+                    <li><a asp-area="" asp-controller="home" asp-action="about">@Localizer.Localize("about")</a></li>
+                    <li><a asp-area="" asp-controller="home" asp-action="contact">@Localizer.Localize("contact")</a></li>
+                </ul>
+            </nav><!-- .nav-menu -->
+            <div id="header-social-media">@await Component.InvokeAsync("SocialLinks")</div>
+        </div>
+    </header><!-- End Header -->
+
+    <main role="main" id="main">
+        @RenderBody()
+    </main>
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="d-flex flex-wrap justify-content-center">
+                <div class="language mx-auto">
+                    @await Html.PartialAsync("_SelectLanguagePartial")
+                </div>
+                <div class="copyright">
+                    &copy; 2020 - @Localizer.Localize("copyright")
+                </div>
+
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/vendor/jquery.easing/jquery.easing.min.js"></script>
+    <script src="~/vendor/jquery-sticky/jquery.sticky.js"></script>
+    <script src="~/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="~/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="~/vendor/venobox/venobox.min.js"></script>
+    <script src="~/vendor/aos/aos.js"></script>
+    <script src="~/js/main.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

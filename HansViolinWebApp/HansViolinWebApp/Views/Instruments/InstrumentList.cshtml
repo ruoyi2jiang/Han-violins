@@ -1,45 +1,86 @@
-﻿@model IEnumerable<HansViolinWebApp.Models.Item>
+﻿@using Microsoft.AspNetCore.Localization
+@using HansViolinWebApp.Resources
 
+@inject LocalizationService Localizer
 
+@model IEnumerable<HansViolinWebApp.Models.Item>
 
-<section id="hero" style="background-image: url(@ViewBag.Category.CoverUrl)" class="mb-5">
-    <div class="hero-container">
-        <div class="wow fadeIn">
-            <h1 data-aos="fade-up">@ViewBag.Category.CategoryName</h1>
-            <div class="description-wrapper" data-aos="fade-up" data-aos-delay="100">
-                <p class="newline-wrapper">@ViewBag.Category.Description</p>
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    ViewData["Title"] = @ViewBag.Category.CategoryName;
+}
+
+    <section id="hero" style="background-image: url(@ViewBag.Category.CoverUrl)">
+        <div class="hero-container">
+            <div class="wow fadeIn">
+                <h1 data-aos="fade-up">@ViewBag.Category.CategoryName</h1>
+                <div class="description-wrapper pb-5" data-aos="fade-up" data-aos-delay="100">
+                    <p class="newline-wrapper">@ViewBag.Category.Description</p>
+                </div>
+                <div class="row text-center d-none d-lg-block">
+                    <div class="col-10 offset-1">
+
+                        <div class="row">
+                            <div id="instrument-carousel" class="owl-carousel instrument-carousel owl-theme">
+                                @foreach (var item in Model)
+                                {
+                                    <div class="px-2 d-inline-block">
+                                        <a href="detail/@item.ItemId">
+                                            <div class="">
+                                                <img class="" src=@item.CoverUrl />
+                                            </div>
+
+                                            <div class="instrument-heading">
+                                                @if (requestCulture.RequestCulture.Culture.Name == "zh")
+                                                {
+                                                    <div class="heading">@item.ItemNameZh</div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="heading">@item.ItemName</div>
+                                                }
+                                            </div>
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
-    </div>
-</section><!-- End Hero -->
+    </section><!-- End Hero -->
 
-<div class="content-wrapper mb-5" data-aos="fade-up">
-    <div class="my-3 text-center">
-        @if (Model.Count() == 0)
-        {
-            <p>No instrument available</p>
-        }
-    </div>
-    @foreach (var item in Model)
-    {
-        <div class="pt-3 px-5 instrument-container">
-            <a asp-area="" asp-controller="instruments" asp-action="detail" asp-route-id="@item.ItemId">
-                <div class="instrument-cover">
-                    @{
-                        var image = @item.Images.Where(i => i.ImageId == item.CoverId).FirstOrDefault();
-                        var url = image != null ? image.Url : "#";
-                    }
-                    <img class="instrument-image" src=@url />
-                </div>
-
-                <div class="instrument-heading">
-                    <div class="heading">@item.ItemName</div>
-                </div>
-            </a>
+    <div class="content-wrapper mb-5 d-lg-none d-flex" data-aos="fade-up">
+        <div class="my-3 text-center">
+            @if (Model.Count() == 0)
+            {
+                <p>@Localizer.Localize("no-instrument")</p>
+            }
         </div>
-    }
+        @foreach (var item in Model)
+        {
+            <div class="pt-3 px-5 instrument-container">
+                <a href="detail/@item.ItemId">
+                    <div class="instrument-cover">
+                        <img class="instrument-image" src=@item.CoverUrl />
+                    </div>
 
-</div>
+                    <div class="instrument-heading">
+                        @if (requestCulture.RequestCulture.Culture.Name == "zh")
+                        {
+                            <div class="heading">@item.ItemNameZh</div>
+                        }
+                        else
+                        {
+                            <div class="heading">@item.ItemName</div>
+                        }
+                    </div>
+                </a>
+            </div>
+        }
 
+    </div>
 
 

@@ -33,27 +33,3 @@ $(function () {
         })
     })
 })
-
-    function Validate() {
-        $.ajax(
-            {
-                type: "POST",
-                url: 'validate',
-                data: {
-                    username: $('#username').val(),
-                    password: $('#password').val()
-                },
-                error: function (result) {
-                    alert("There is a Problem, Try Again!");
-                },
-                success: function (result) {
-                    console.log(result);
-                    if (result.status == true) {
-                        window.location.href = 'loginRedirect';
-                    }
-                    else {
-                        alert(result.message);
-                    }
-                }
-            });
-    }

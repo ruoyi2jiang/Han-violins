@@ -1,18 +1,35 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using HansViolinWebApp.Resources
+
+@inject LocalizationService Localizer
+@{
+    ViewData["Title"] = Localizer.Localize("home");
 }
 
-<section id="hero" style="background-image: url(../img/home.jpg)">
-    <div class="hero-container">
-        <div class="wow fadeIn">
-
-            <h1 data-aos="fade-up">Han Violins</h1>
-            <div class="description-wrapper" data-aos="fade-up" data-aos-delay="100">
-                <p class="newline-wrapper">Some eye catching description</p>
+<section id="carousel" class="carousel slide" data-ride="carousel" data-interval="5000">
+    <div class="carousel-caption d-md-block">
+        <div data-aos="fade-up"><img src="~/img/Logo.png" alt="Han Violins"></div>
+        <div class="description-wrapper" data-aos="fade-up" data-aos-delay="100">
+            <p class="newline-wrapper">@Localizer.Localize("home-description")</p>
+        </div>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="item" style="background-image: url(../img/home.jpg)">
+                <div class="black-overlay"></div>
             </div>
-            <div class="actions" data-aos="fade-up" data-aos-delay="100">
-                <a href="#about" class="btn-get-started">Read More</a>
+        </div>
+        <div class="carousel-item">
+            <div class="item" style="background-image: url(../img/violin.jpg)">
+                <div class="black-overlay"></div>
             </div>
         </div>
     </div>
-</section><!-- End Hero -->
+    <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</section>

@@ -1,39 +1,30 @@
-﻿<!DOCTYPE html>
+﻿@using HansViolinWebApp.Resources
+
+@inject LocalizationService Localizer
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Han Violins</title>
+    <title>@ViewData["Title"] - @Localizer.Localize("han-violins")</title>
     <meta content="" name="descriptison">
     <meta content="" name="keywords">
 
-    <!-- Facebook Opengraph integration: https://developers.facebook.com/docs/sharing/opengraph -->
-    <meta property="og:title" content="">
-    <meta property="og:image" content="">
-    <meta property="og:url" content="">
-    <meta property="og:site_name" content="">
-    <meta property="og:description" content="">
-
-    <!-- Twitter Cards integration: https://dev.twitter.com/cards/  -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="">
-    <meta name="twitter:title" content="">
-    <meta name="twitter:description" content="">
-    <meta name="twitter:image" content="">
-
     <!-- Favicons -->
-    <link href="~/favicon.ico" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="~/favicon.png" rel="icon">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Vollkorn+SC:wght@400;600&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Long+Cang&family=Noto+Serif+SC:wght@400&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 
     <link href="~/vendor/icofont/icofont.min.css" rel="stylesheet">
-    <link href="~/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="~/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/vendor/owl.carousel/assets/owl.theme.default.min.css" rel="stylesheet">
     <link href="~/vendor/venobox/venobox.css" rel="stylesheet">
     <link href="~/vendor/aos/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site2.css" />
@@ -47,25 +38,23 @@
 
         <div class="container d-flex align-items-center">
 
-            <a asp-area="" asp-controller="home" asp-action="index" class="logo mr-auto"><img src="#" alt="logo"></a>
+            <a asp-area="" asp-controller="home" asp-action="index" class="logo mr-auto"><img src="~/img/Logo2.png" alt="logo"></a>
             <!-- Uncomment below if you prefer to use a text logo -->
             <!-- <h1 class="logo mr-auto"><a href="index.html">Han Violins</a></h1> -->
 
             <nav class="nav-menu d-none d-lg-block mr-auto">
                 <ul>
-                    <li><a asp-area="" asp-controller="home" asp-action="index">Home</a></li>
                     <li class="drop-down">
-                        <a href="#">Instruments</a>
+                        <a href="#">@Localizer.Localize("instruments-bows")</a>
                         @await Component.InvokeAsync("DropDownMenu")
                     </li>
-                    <li><a asp-area="" asp-controller="instruments" asp-action="NotableSales">Notable Sales</a></li>
-                    <li><a asp-area="" asp-controller="news" asp-action="index">News</a></li>
-                    <li><a asp-area="" asp-controller="home" asp-action="about">About</a></li>
-                    <li><a asp-area="" asp-controller="home" asp-action="contact">Contact</a></li>
-
+                    <li><a asp-area="" asp-controller="instruments" asp-action="NotableSales">@Localizer.Localize("notable-sales")</a></li>
+                    <li><a asp-area="" asp-controller="news" asp-action="index">@Localizer.Localize("news")</a></li>
+                    <li><a asp-area="" asp-controller="home" asp-action="about">@Localizer.Localize("about")</a></li>
+                    <li><a asp-area="" asp-controller="home" asp-action="contact">@Localizer.Localize("contact")</a></li>
                 </ul>
             </nav><!-- .nav-menu -->
-            @await Component.InvokeAsync("SocialLinks")
+            <div id="header-social-media">@await Component.InvokeAsync("SocialLinks")</div>
         </div>
     </header><!-- End Header -->
 
@@ -76,13 +65,14 @@
     <!-- ======= Footer ======= -->
     <footer id="footer">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-
-                    <div class="copyright">
-                        &copy; 2020 - Han Violins - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                    </div>
+            <div class="d-flex flex-wrap justify-content-center">
+                <div class="language mx-auto">
+                    @await Html.PartialAsync("_SelectLanguagePartial")
                 </div>
+                <div class="copyright">
+                    &copy; 2020 - @Localizer.Localize("copyright")
+                </div>
+
             </div>
         </div>
     </footer><!-- End Footer -->
@@ -100,7 +90,6 @@
     <script src="~/vendor/venobox/venobox.min.js"></script>
     <script src="~/vendor/aos/aos.js"></script>
     <script src="~/js/main.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

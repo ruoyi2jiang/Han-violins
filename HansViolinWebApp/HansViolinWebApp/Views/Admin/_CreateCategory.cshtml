@@ -18,7 +18,7 @@
                                 <span asp-validation-for="CategoryName" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="PathName" class="control-label">Url Path Name*</label>
+                                <label asp-for="PathName" class="control-label">Url Path Name*(不可更改, 全英文小写，不能有空格（用-代替））</label>
                                 <input asp-for="PathName" class="form-control" />
                                 <span asp-validation-for="PathName" class="text-danger"></span>
                             </div>
@@ -32,7 +32,7 @@
                                 <input asp-for="CoverUrl" class="form-control" />
                                 <span asp-validation-for="CoverUrl" class="text-danger"></span>
                             </div>
-                            *Required<br />
+                            *必填<br />
                             <span>Note: Categories are displayed in the order of creation!</span>
                         </form>
                     </div>

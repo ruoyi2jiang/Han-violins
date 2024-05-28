@@ -8,6 +8,7 @@ namespace HansViolinWebApp.Models
         public int Id { get; set; }
 
         public string About { get; set; }
+        public string AboutZh { get; set; }
 
         [StringLength(20)]
         public string Phone { get; set; }
@@ -32,5 +33,8 @@ namespace HansViolinWebApp.Models
 
         [StringLength(255)]
         public string Instagram { get; set; }
+
+        [StringLength(255)]
+        public string Wechat { get; set; }
     }
 }

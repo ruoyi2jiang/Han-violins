@@ -2,10 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using HansViolinWebApp.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace HansViolinWebApp.Data
 {
-    public partial class HansViolinWebContext : DbContext
+    public partial class HansViolinWebContext : IdentityDbContext
     {
         public HansViolinWebContext(DbContextOptions<HansViolinWebContext> options) : base(options)
         {
@@ -16,11 +17,11 @@ namespace HansViolinWebApp.Data
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<News> News { get; set; }
-        public virtual DbSet<AdminUser> AdminUsers { get; set; }
         public virtual DbSet<BusinessDetail> BusinessDetails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Category>()
                 .HasMany(i => i.Items)
                 .WithOne(c => c.Category);

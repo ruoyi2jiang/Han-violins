@@ -13,13 +13,14 @@
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <input type="hidden" asp-for="ItemId" />
                             <input type="hidden" asp-for="CategoryId" />
-                            @*<input type="hidden" asp-for="CategoryName" />*@
+                            <input type="hidden" asp-for="CoverUrl" />
+                            <input type="hidden" asp-for="CoverId" />
+                            <input type="hidden" asp-for="ItemNameZh" />
+                            <input type="hidden" asp-for="OriginInfoZh" />
+                            <input type="hidden" asp-for="DescriptionZh" />
+                            <input type="hidden" asp-for="SoldinfoZh" />
+                            <input type="hidden" asp-for="CategoryName" />
 
-                            <div class="form-group">
-                                <label asp-for="CategoryName" class="control-label">Category Path (Make sure it matches with Category path)</label>
-                                <input asp-for="CategoryName" class="form-control" />
-                                <span asp-validation-for="CategoryName" class="text-danger"></span>
-                            </div>
                             <div class="form-group">
                                 <label asp-for="ItemName" class="control-label">Name</label>
                                 <input asp-for="ItemName" class="form-control" />
@@ -36,14 +37,14 @@
                                 <span asp-validation-for="PriceRange" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="CoverId" class="control-label"></label>
-                                <input asp-for="CoverId" class="form-control" />
-                                <span asp-validation-for="CoverId" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
                                 <label asp-for="OriginInfo" class="control-label">Origin/Time info</label>
                                 <input asp-for="OriginInfo" class="form-control" />
                                 <span asp-validation-for="OriginInfo" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="SoldInfo" class="control-label">Notable Sale Info</label>
+                                <input asp-for="SoldInfo" class="form-control" />
+                                <span asp-validation-for="SoldInfo" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="Status" class="control-label"></label>

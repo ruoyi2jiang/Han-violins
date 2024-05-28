@@ -157,11 +157,20 @@
 
   // Portfolio details carousel
   $(".portfolio-details-carousel").owlCarousel({
-    autoplay: true,
+    autoplay: false,
     dots: true,
     loop: true,
     items: 1
   });
+
+    // Portfolio details carousel
+    /*$(".instrument-carousel").owlCarousel({
+        autoplay: true,
+        center: true,
+        nav: true,
+        dots: false,
+        items: 5
+    });*/
 
   // Init AOS
   function aos_init() {
@@ -175,3 +184,53 @@
   });
 
 })(jQuery);
+
+
+function make3dcarousel() {
+    var carousel = $("#instrument-carousel");
+
+    var visibleSlides = $(carousel).find('.owl-item.active');
+    var count = 1;
+    $(visibleSlides).each(function () {
+        if (count == 1 || count == 5) {
+            $(this).removeClass("middle");
+            $(this).removeClass("front");
+            $(this).addClass("small");
+        }
+        else if (count == 2 || count == 4) {
+            $(this).removeClass("small");
+            $(this).removeClass("front");
+            $(this).addClass("middle");
+        }
+        else if (count == 3) {
+            $(this).removeClass("middle");
+            $(this).removeClass("small");
+            $(this).addClass("front");
+        }
+        count++;
+    });
+        
+}
+
+$("#instrument-carousel").on('initialized.owl.carousel', function (event) {
+        make3dcarousel();
+    });
+
+$("#instrument-carousel").owlCarousel({
+    nav: true,
+    touchDrag: false,
+    mouseDrag: true,
+    autoplay: true,
+    autoplayTimeout: 6000,
+    autoplayHoverPause: true,
+    smartSpeed: 2000,
+    dots: false,
+    items: 5
+    });
+
+$("#instrument-carousel").on('changed.owl.carousel', function (event) {
+        setTimeout(function () {
+            make3dcarousel();
+        }, 220);
+    });
+

@@ -16,17 +16,25 @@ namespace HansViolinWebApp.Models
         [Required(ErrorMessage = "Title is required")]
         [StringLength(80)]
         public string ItemName { get; set; }
+        public string ItemNameZh { get; set; }
 
         [StringLength(1024)]
         public string Description { get; set; }
+        public string DescriptionZh { get; set; }
 
         [StringLength(50)]
         public string PriceRange { get; set; }
 
         public int? CoverId { get; set; }
 
+        public string CoverUrl { get; set; }
+
         [StringLength(50)]
         public string OriginInfo { get; set; }
+        public string OriginInfoZh { get; set; }
+
+        public string SoldInfo { get; set; }
+        public string SoldinfoZh { get; set; }
 
         [Required(ErrorMessage = "Status is required")]
         [StringLength(15)]

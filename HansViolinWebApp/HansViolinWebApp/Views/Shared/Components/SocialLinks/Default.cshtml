@@ -1,16 +1,25 @@
 ﻿@model HansViolinWebApp.Models.BusinessDetail
 
     <div class="social-links">
+        @if (Model.Wechat != null)
+        {
+        <div class="wechat">
+            <a href=@Model.Twitter><i class="icofont-wechat"></i></a>
+            <div class="hover-modal">
+                <img src =@Model.Wechat class="wechat-qr" />
+            </div>
+        </div>
+        }
         @if (Model.Twitter != null)
         {
-            <a href=@Model.Twitter class="twitter"><i class="fa fa-twitter"></i></a>
+            <a href=@Model.Twitter class="twitter" target="_blank"><i class="icofont-twitter"></i></a>
         }
         @if (Model.Facebook != null)
         {
-            <a href=@Model.Facebook class="facebook"><i class="fa fa-facebook"></i></a>
+            <a href=@Model.Facebook class="facebook" target="_blank"><i class="icofont-facebook"></i></a>
         }
         @if (Model.Instagram != null)
         {
-            <a href=@Model.Instagram class="instagram"><i class="fa fa-instagram"></i></a>
+            <a href=@Model.Instagram class="instagram" target="_blank"><i class="icofont-instagram"></i></a>
         }
     </div>

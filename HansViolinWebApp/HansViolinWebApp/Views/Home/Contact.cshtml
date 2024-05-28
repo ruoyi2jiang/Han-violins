@@ -1,39 +1,41 @@
-﻿@model HansViolinWebApp.Models.BusinessDetail
+﻿@using HansViolinWebApp.Resources
 
+
+@model HansViolinWebApp.Models.BusinessDetail
+@inject LocalizationService Localizer
 @{
-    ViewData["Title"] = "Contact";
+    ViewData["Title"] = @Localizer.Localize("contact");
     var mailto = "mailto:" + Model.Email;
-
+    Layout = "~/Views/Shared/_InnerLayout.cshtml";
 }
 
-<div id="header-bg" class="header-visible"></div>
 
 <section id="contact" class="title-padding">
     <div class="container mb-5">
-        <div  data-aos="fade-up">
+        <div data-aos="fade-up">
             <div class="title">
-                <h2>Contact Us</h2>
+                <h2>@Localizer.Localize("contact-us")</h2>
             </div>
         </div>
-        <div id="map-container-google" class="z-depth-1-half map-container"  data-aos="fade-up" data-aos-delay="100">
-            <iframe src="https://maps.google.com/maps?q=chicago&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
-                    style="border:0" allowfullscreen></iframe>
+        <div id="map-container-google" class="z-depth-1-half map-container" data-aos="fade-up" data-aos-delay="100">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1241.268761246308!2d-0.29660640178005293!3d51.521700188571685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4876120ee4f1b973%3A0xd0462bc2f011527b!2s32%20Corfton%20Rd%2C%20Hanger%20Hill%2C%20London%20W5%202HR!5e0!3m2!1sen!2suk!4v1606343870002!5m2!1sen!2suk" 
+                    frameborder="0" style="border:0;" allowfullscreen></iframe>
         </div> <!--Google Maps-->
-        <div  data-aos="fade-up" data-aos-delay="200">
+        <div data-aos="fade-up" data-aos-delay="200">
             <div class="mb-3">
                 <div class="row mt-3"></div>
                 <div class="col-lg-4">
                     <div class="info">
                         <div class="phone">
-                            <span>Tel:</span>
+                            <span>@Localizer.Localize("tel"):</span>
                             <span>@Model.Phone</span>
                         </div>
                         <div class="email">
-                            <span>Email:</span>
+                            <span>@Localizer.Localize("email"):</span>
                             <span><a href=@mailto>@Model.Email</a></span>
                         </div>
                         <div class="address">
-                            <span>Address:</span>
+                            <span>@Localizer.Localize("address"):</span>
                             <span>@Model.Address, @Model.Postcode</span>
                         </div>
                         @await Component.InvokeAsync("SocialLinks")

@@ -5,19 +5,30 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HtmlSanitizer" Version="5.0.310" />
-    <PackageReference Include="microsoft.EntityFrameworkcore" Version="3.1.7" />
-    <PackageReference Include="microsoft.entityframeworkcore.design" Version="3.1.7">
+    <Compile Remove="Migrations\20200926150433_identityUser.cs" />
+    <Compile Remove="Migrations\20200926150433_identityUser.Designer.cs" />
+    <Compile Remove="Migrations\20200926152244_remove_adminUser.cs" />
+    <Compile Remove="Migrations\20200926152244_remove_adminUser.Designer.cs" />
+    <Compile Remove="Migrations\20200929092729_alter_businessDetail_add_wechat.cs" />
+    <Compile Remove="Migrations\20200929092729_alter_businessDetail_add_wechat.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlSanitizer" Version="5.0.343" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.8" />
+    <PackageReference Include="microsoft.EntityFrameworkcore" Version="3.1.8" />
+    <PackageReference Include="microsoft.entityframeworkcore.design" Version="3.1.8">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="microsoft.entityframeworkcore.sqlserver" Version="3.1.7" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.7">
+    <PackageReference Include="microsoft.entityframeworkcore.sqlserver" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.8">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
-    <PackageReference Include="System.Web.Helpers.Crypto" Version="3.2.3" />
   </ItemGroup>
 
 

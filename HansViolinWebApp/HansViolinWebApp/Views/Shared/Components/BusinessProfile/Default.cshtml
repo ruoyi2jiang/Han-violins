@@ -8,6 +8,10 @@
     <div class="flex-box mb-3">
         <h2 class="mr-3 mb-0">About Us</h2>
         <button type="button" class="btn-small" data-toggle="ajax-modal" data-target="#editProfile"
+                data-url="@Url.Action("EditProfileTranslation")">
+            翻译
+        </button>
+        <button type="button" class="btn-small" data-toggle="ajax-modal" data-target="#editProfile"
                 data-url="@Url.Action("EditProfile")">
             Edit
         </button>
@@ -22,6 +26,7 @@
     <div>
         <div><strong>Content (HTML tags allowed)</strong></div>
         <div>@Html.Raw(sanitizer.Sanitize(Model.About))</div>
+        <div>@Html.Raw(sanitizer.Sanitize(Model.AboutZh))</div>
     </div>
 </div>
 
@@ -49,6 +54,10 @@
         <div>
             <span><strong>Postcode</strong></span>
             <span>@Model.Postcode</span>
+        </div>
+        <div>
+            <span><strong>Wechat (QR code image link)</strong></span>
+            <span>@Model.Wechat</span>
         </div>
         <div>
             <span><strong>Twitter</strong></span>

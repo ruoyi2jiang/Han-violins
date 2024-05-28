@@ -1,12 +1,17 @@
-﻿@model HansViolinWebApp.Models.News
+﻿@using Microsoft.AspNetCore.Localization
+@using HansViolinWebApp.Resources
+
+@inject LocalizationService Localizer
+@model HansViolinWebApp.Models.News
 @{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
     ViewData["Title"] = Model.Title;
+    Layout = "~/Views/Shared/_InnerLayout.cshtml";
     var sanitizer = new Ganss.XSS.HtmlSanitizer();
     sanitizer.AllowedCssProperties.Add("flex-wrap");
     sanitizer.AllowedCssProperties.Add("justify-content");
 }
 
-<div id="header-bg" class="header-visible"></div>
 
 <section id="breadcrumbs" class="breadcrumbs">
     <div class="container"></div>
@@ -15,9 +20,9 @@
         <div class="d-flex justify-content-between align-items-center">
             <h2> </h2>
             <ol>
-                <li><a asp-controller="home" asp-action="index">Home</a></li>
-                <li><a asp-controller="news" asp-action="index">News</a></li>
-                <li style="color: #EB5552">Article</li>
+                <li><a asp-controller="home" asp-action="index">@Localizer.Localize("home")</a></li>
+                <li><a asp-controller="news" asp-action="index">@Localizer.Localize("news")</a></li>
+                <li style="color: #EB5552">@Localizer.Localize("article")</li>
             </ol>
         </div>
 
@@ -29,17 +34,39 @@
     <div class="container mb-5">
         <div class="news-container">
             <div class="title" data-aos="fade-up">
-                <h3>@Model.Title</h3>
+                @if (requestCulture.RequestCulture.Culture.Name == "zh")
+                {
+                    <h3>@Model.TitleZh</h3>
+                }
+                else
+                {
+                    <h3>@Model.Title</h3>
+                }
                 <hr />
             </div>
-            <div class="mb-5 addition-info"  data-aos="fade-up">
+            <div class="mb-5 addition-info" data-aos="fade-up">
                 @if (Model.PublishedDate != null)
                 {
-                    <span>Published on </span> @Model.PublishedDate.Value.Date.ToString("dd MMM yyyy")
+                    if (requestCulture.RequestCulture.Culture.Name == "zh")
+                    {
+                        <span>@Localizer.Localize("published-on") </span> @Model.PublishedDate.Value.Date.ToString("D");
+                    }
+                    else
+                    {
+                        <span>@Localizer.Localize("published-on") </span> @Model.PublishedDate.Value.Date.ToString("dd MMM yyyy");
+                    }
                 }
             </div>
-            <div class="news-content mb-3"  data-aos="fade-up" data-aos-delay="100">
-                @Html.Raw(sanitizer.Sanitize(Model.Content))
+            <div class="news-content mb-3" data-aos="fade-up" data-aos-delay="100">
+                @if (requestCulture.RequestCulture.Culture.Name == "zh")
+                {
+                    @Html.Raw(sanitizer.Sanitize(Model.ContentZh))
+                }
+                else
+                {
+                    @Html.Raw(sanitizer.Sanitize(Model.Content))
+                }
+
             </div>
         </div>
     </div>

@@ -29,8 +29,8 @@ p {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: "Raleway", sans-serif;
-    font-weight: 400;
+    font-family: 'Cormorant Garamond', serif, 'Noto Serif SC', serif;
+    font-weight: 500;
     margin: 0 0 20px 0;
     padding: 0;
 }
@@ -136,6 +136,22 @@ h1, h2, h3, h4, h5, h6 {
         outline: none;
     }
 
+.btn-white {
+    color: white;
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+}
+
+    .btn-white:hover, .btn-white:active {
+        color: #EB5552;
+    }
+
+    .btn-white:focus {
+        color: #EB5552;
+        outline: none;
+        box-shadow: none;
+    }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
@@ -172,11 +188,44 @@ button.accept-policy {
 /*--------------------------------------------------------------
 # Welcome
 --------------------------------------------------------------*/
+#carousel {
+    display: table;
+    width: 100%;
+    
+}
+.carousel-inner .item {
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+
+@media (min-width: 1024px) {
+    .carousel-inner .item {
+        background-attachment: fixed;
+    }
+}
+
+.black-overlay {
+    background: rgba(0, 0, 0, 0.4);
+    height: 100%;
+}
+
+.carousel-caption {
+    bottom: 30%;
+}
+
+.carousel-caption img {
+    width: 500px;
+    max-width: 90%;
+}
+
 #hero {
     display: table;
     width: 100%;
     height: 100vh;
     background-size: cover;
+    background-position: center;
 }
 
 @media (min-width: 1024px) {
@@ -190,21 +239,22 @@ button.accept-policy {
 }
 
 #hero .hero-container {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.7);
     display: table-cell;
     margin: 0;
-    padding: 0;
+    padding: 10vh 8vw;
     text-align: center;
-    vertical-align: middle;
+    vertical-align: bottom;
 }
 
 #hero h1 {
-    margin: 30px 0 10px 0;
+    margin: 80px 0 10px 0;
     font-weight: 700;
     line-height: 48px;
     text-transform: uppercase;
     color: #fff;
 }
+
 
 @media (max-width: 768px) {
     #hero h1 {
@@ -241,7 +291,6 @@ button.accept-policy {
 }
 
 #hero .actions a {
-    font-family: "Raleway", sans-serif;
     text-transform: uppercase;
     font-weight: 500;
     font-size: 14px;
@@ -253,21 +302,11 @@ button.accept-policy {
     margin: 10px;
 }
 
-#hero .btn-get-started {
-    background: none;
-    color: #fff;
-}
-
-    #hero .btn-get-started:hover {
-        background: none;
-        color: #EB5552;
-    }
-
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
 #header {
-    height: 90px;
+    height: 100px;
     padding: 25px 0;
     position: fixed;
     left: 0;
@@ -275,12 +314,13 @@ button.accept-policy {
     right: 0;
     transition: all 0.5s;
     z-index: 997;
+    background-image: linear-gradient(to top, rgba(13,13,13,0), rgba(13,13,13,0.7), rgba(13,13,13,1));
 }
 
 @media (max-width: 991px) {
     #header {
         background: #0d0d0d;
-        height: 70px;
+        height: 80px;
         padding: 15px 0;
         transition: all 0.5s;
     }
@@ -293,13 +333,13 @@ button.accept-policy {
 }
 #header.header-scrolled, #header.header-fixed {
     background: #0d0d0d;
-    height: 70px;
+    height: 80px;
     padding: 15px 0;
     transition: all 0.5s;
 }
 
 .header-visible {
-    height: 90px;
+    height: 100px;
     position: fixed;
     left: 0;
     top: 0;
@@ -312,14 +352,14 @@ button.accept-policy {
 @media (max-width: 991px) {
     .header-visible {
         background: #0d0d0d;
-        height: 70px;
+        height: 80px;
         padding: 15px 0;
         transition: all 0.5s;
     }
 }
 
 .header-hight-overwrite {
-    height : 70px !important;
+    height : 80px !important;
 }
 
     #header .logo {
@@ -345,6 +385,13 @@ button.accept-policy {
         font-size: 28px;
     }
 }
+@media (max-width: 992px) {
+    #header .logo img {
+        position: fixed;
+        top:15px;
+    }
+}
+
 
 .is-sticky #header {
     background: #0d0d0d;
@@ -357,38 +404,31 @@ button.accept-policy {
 
 @media (max-width: 991px){
     #header .social-links {
-        position: absolute;
-        right: 45px;
+        position: fixed;
+        right: 68px;
+        top: 30px;
     }
 }
 
     #header .social-links a {
         font-size: 18px;
         display: inline-block;
-        background: #222636;
         color: #eee;
         line-height: 1;
-        padding: 8px 0;
-        margin-right: 5px;
-        border-radius: 50%;
-        text-align: center;
-        width: 36px;
-        height: 36px;
+        padding-left: 6px;
+        margin-left: 5px;
         transition: 0.3s;
     }
 @media (max-width: 991px) {
     #header .social-links a {
-        padding: 7px 0;
-        font-size: 16px;
-        width: 30px;
+        width: 22px;
         height: 30px;
     }
 }
 
-        #header .social-links a:hover {
-            background: #EB5552;
-            color: #fff;
-        }
+#header .social-links a:hover {
+    color: #EB5552;
+}
 
 /*--------------------------------------------------------------
 # Navigation Menu
@@ -415,13 +455,14 @@ button.accept-policy {
     position: relative;
     color: #fff;
     transition: 0.3s;
-    font-size: 14px;
-    font-family: "Raleway", sans-serif;
+    font-size: 21px;
+    font-family: 'Cormorant Garamond', serif, 'Noto Serif SC', serif;
+    font-weight: 500;
 }
 
     .nav-menu a:hover, .nav-menu .active > a, .nav-menu li:hover > a {
         color: #EB5552;
-        font-weight:bold;
+        font-weight:500;
     }
 
 
@@ -452,7 +493,7 @@ button.accept-policy {
 
 .nav-menu .drop-down ul a {
     padding: 10px 20px;
-    font-size: 14px;
+    font-size: 21px;
     font-weight: 500;
     text-transform: none;
     color: #333333;
@@ -507,8 +548,8 @@ button.accept-policy {
 /* Mobile Navigation */
 .mobile-nav-toggle {
     position: fixed;
-    right: 15px;
-    top: 15px;
+    right: 10px;
+    top: 27px;
     z-index: 9998;
     border: 0;
     background: none;
@@ -538,6 +579,9 @@ button.accept-policy {
     visibility: hidden;
     border-radius: 10px;
     padding: 10px 0;
+    font-size: 26px;
+    font-family: 'Cormorant Garamond', serif, 'Noto Serif SC', serif;
+    font-weight: 500;
 }
 
     .mobile-nav * {
@@ -853,8 +897,9 @@ html {
 body {
     background: #fff;
     color: #666666;
-    font-family: "Open Sans", sans-serif;
+    font-family: "Open Sans", sans-serif, 'Noto Serif SC', serif;
     padding-bottom: 120px;
+    font-size: 16px;
 }
 
 
@@ -895,7 +940,7 @@ body {
 }
 
     .info span {
-        padding: 0 0 0 5px;
+        padding: 0;
         margin-bottom: 0;
         font-size: 16px;
         color: #555555;
@@ -904,6 +949,9 @@ body {
     .info .email, .info .address, .info .social-links {
         margin-top: 20px;
     }
+        .info .social-links {
+            display: flex;
+        }
         .info .social-links a {
             font-size: 18px;
             color: #222636;
@@ -916,6 +964,39 @@ body {
                 color: #EB5552;
             }
 
+
+            .info .social-links .hover-modal {
+                display: none !important;
+                position: absolute;
+                background-color: white;
+                display: flex;
+                justify-content: center;
+                bottom: 20px;
+            }
+
+.hover-modal {
+    display: none !important;
+    position: absolute;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width: 1435px) {
+    header .hover-modal {
+        right: 5px;
+    }
+}
+
+.wechat:hover .hover-modal {
+    display: block !important;
+}
+
+.wechat-qr {
+    width: 250px;
+    height: auto;
+    align-self: center;
+}
 /*News*/
 .news-container {
     padding: 0 10%;
@@ -948,8 +1029,20 @@ body {
 }
 
     #footer .copyright {
-        text-align: center;
+        text-align: left;
         margin-top: 10px;
     }
+
+    #footer .language {
+        width: 400px;
+        max-width: 100%;
+        text-align: center;
+        margin-top: 10px;
+        align-self: center;
+    }
+
+        #footer .language .active {
+            color: #EB5552;
+        }
     
 

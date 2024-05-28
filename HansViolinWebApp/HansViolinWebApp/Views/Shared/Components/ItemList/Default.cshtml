@@ -19,31 +19,42 @@
                     {
                         <button class="draft-vl" data-toggle="tooltip" data-placement="bottom" title="Draft"></button>
                     }
+                    <img class="header-image" src=@item.CoverUrl />
                     <button class="btn btn-link admin-sub-header" type="button" data-toggle="collapse" data-target="#item-@item.ItemId" aria-expanded="false" aria-controls="item-@item.ItemId">
-                        @item.ItemName
+                        @item.ItemName  @item.ItemNameZh
                     </button>
                     <div class="container-action">
                         <button type="button" class="btn-small" data-toggle="ajax-modal" data-target="#editItem"
+                                data-url="@Url.Action($"EditItemTranslation/{item.ItemId}")">
+                            翻译
+                        </button>
+                        <button type="button" class="btn-small" data-toggle="ajax-modal" data-target="#editItem"
                                 data-url="@Url.Action($"EditItem/{item.ItemId}")">
-                            Edit
+                            编辑
+                        </button>
+                        <button type="button" class="btn-small" data-toggle="ajax-modal" data-target="#editCover"
+                                data-url="@Url.Action($"EditItemCover/{item.ItemId}")">
+                            封面
                         </button>
                         <button type="button" class="btn-small" data-toggle="ajax-modal" data-target="#deleteItem"
                                 data-url="@Url.Action($"DeleteItem/{item.ItemId}")">
-                            Delete
+                            删除
                         </button>
+
                     </div>
                 </div>
             </div>
 
-            <div id="item-@item.ItemId" class="collapse" aria-labelledby="@item.ItemName" data-parent="#itemList">
+            <div id="item-@item.ItemId" class="collapse show" aria-labelledby="@item.ItemName" data-parent="#itemList">
                 <div class="card-body">
                     <div class="category-container">
                         <div class="admin-sub-container">
                             <div class="mb-5">
                                 <div><strong>@Html.DisplayNameFor(model => model.Description)</strong></div>
                                 <div class="newline-wrapper">@Html.DisplayFor(modelItem => item.Description)</div>
+                                <div class="newline-wrapper">@Html.DisplayFor(modelItem => item.DescriptionZh)</div>
                             </div>
-                            <div class="flex-box mb-5">
+                            <div class="flex-box">
                                 <div class="mr-5 pr-5">
                                     <div>
                                         <div><strong>Price Range</strong></div>
@@ -52,6 +63,7 @@
                                     <div>
                                         <div><strong>Origin / Year (Additional info)</strong></div>
                                         <div>@Html.DisplayFor(modelItem => item.OriginInfo)</div>
+                                        <div>@Html.DisplayFor(modelItem => item.OriginInfoZh)</div>
                                     </div>
                                 </div>
                                 <div>
@@ -65,6 +77,11 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="mb-5">
+                                <div><strong>Notable Sale Info</strong></div>
+                                <div>@Html.DisplayFor(modelItem => item.SoldInfo)</div>
+                                <div>@Html.DisplayFor(modelItem => item.SoldinfoZh)</div>
+                            </div>
                             <div>
                                 <div class="flex-box mb-3">
                                     <div class="mr-5"><strong>Images</strong></div>
@@ -74,25 +91,12 @@
                                             Add Image
                                         </button>
                                     </div>
-                                    
                                 </div>
-                                
+
                                 <div class="flex-box">
                                     @foreach (var image in item.Images)
                                     {
                                         <div class="admin-image-container m-3">
-                                            @if (image.ImageId == item.CoverId)
-                                            {
-                                            <div>
-                                                <img class="admin-table-image selected" src=@image.Url />
-                                                <button type="button" class="btn-x" data-toggle="ajax-modal" data-target="#deleteImage"
-                                                        data-url="@Url.Action($"DeleteImage/{image.ImageId}")">
-                                                    X
-                                                </button>
-                                            </div>
-                                            }
-                                            else
-                                            {
                                             <div>
                                                 <img class="admin-table-image" src=@image.Url />
                                                 <button type="button" class="btn-x" data-toggle="ajax-modal" data-target="#deleteImage"
@@ -100,19 +104,12 @@
                                                     X
                                                 </button>
                                             </div>
-                                            <div>
-                                                <button type="button" class="btn-small w-100" data-toggle="ajax-modal" data-target="#editCover"
-                                                        data-url="@Url.Action($"EditItemCover/{item.ItemId}", new {coverId = image.ImageId})">
-                                                    Set Cover
-                                                </button>
-                                            </div>
-                                            }
-                                            
+
                                         </div>
                                     }
                                 </div>
-                                
-                                
+
+
 
                             </div>
                         </div>

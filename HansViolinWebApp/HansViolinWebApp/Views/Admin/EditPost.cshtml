@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Edit Post";
+    Layout = "~/Views/Shared/_admLayout.cshtml";
 }
 
     <div id="header-bg" class="header-visible"></div>
@@ -14,6 +15,8 @@
                 <form asp-action="EditPost">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="TitleZh" />
+                    <input type="hidden" asp-for="ContentZh" />
                     <div class="form-group">
                         <label asp-for="Title" class="control-label"></label>
                         <input asp-for="Title" class="form-control" />
@@ -21,7 +24,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Content" class="control-label">HTML</label>
-                        <textarea rows="30" asp-for="Content" class="form-control"></textarea>
+                        <textarea rows="30" asp-for="Content" class="form-control">@Model.Content</textarea>
                         <span asp-validation-for="Content" class="text-danger"></span>
                     </div>
                     <input type="hidden" asp-for="CreatedDate" />

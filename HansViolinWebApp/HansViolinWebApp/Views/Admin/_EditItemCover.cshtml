@@ -7,9 +7,9 @@
                 <h4 class="modal-title" id="editCoverLabel">Choose Cover</h4>
             </div>
             <div class="modal-body">
-                <div>Set this image as cover?</div>
+                <div class="text-center">Set this image as cover?</div>
                 <div class="row">
-                    <div>
+                    <div class="col-md-12">
                         <form asp-action="EditItemCover">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <input type="hidden" asp-for="ItemId" />
@@ -19,11 +19,21 @@
                             <input type="hidden" asp-for="Description" />
                             <input type="hidden" asp-for="PriceRange" />
                             <input type="hidden" asp-for="CoverId" />
+                            <div class="form-group">
+                                <label asp-for="CoverUrl" class="control-label">Cover Link</label>
+                                <input asp-for="CoverUrl" class="form-control" />
+                                <span asp-validation-for="CoverUrl" class="text-danger"></span>
+                            </div>
                             <input type="hidden" asp-for="OriginInfo" />
                             <input type="hidden" asp-for="Status" />
                             <input type="hidden" asp-for="DateAdded" />
+                            <input type="hidden" asp-for="ItemNameZh" />
+                            <input type="hidden" asp-for="OriginInfoZh" />
+                            <input type="hidden" asp-for="SoldInfo" />
+                            <input type="hidden" asp-for="SoldinfoZh" />
+                            <input type="hidden" asp-for="DescriptionZh" />
                         </form>
-                    </div>
+                    </divclass="col-md-12">
                 </div>
             </div>
             <div class="modal-footer">

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using HansViolinWebApp.Data;
 using HansViolinWebApp.Models;
 using HansViolinWebApp.Models.Repository;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -16,12 +18,14 @@ namespace HansViolinWebApp.Controllers
     public class AdminController : Controller
     {
         private readonly HansViolinWebContext _context;
+        private readonly IWebHostEnvironment _hostEnvironment;
         private NewsRepository newsRepository;
 
-        public AdminController(HansViolinWebContext context)
+        public AdminController(HansViolinWebContext context, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
             newsRepository = new NewsRepository(_context);
+            _hostEnvironment = hostEnvironment;
         }
         // GET: Admin
         public ActionResult Index()
@@ -59,7 +63,7 @@ namespace HansViolinWebApp.Controllers
 
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateItem([Bind("ItemId,CategoryId,CategoryName,ItemName,Description,PriceRange,CoverId,OriginInfo,Status")] Item item)
+        public async Task<IActionResult> CreateItem([Bind("ItemId,CategoryId,CategoryName,ItemName,Description,PriceRange,CoverId,OriginInfo,SoldInfo,Status")] Item item)
         {
             if (ModelState.IsValid)
             {
@@ -87,9 +91,25 @@ namespace HansViolinWebApp.Controllers
             return PartialView("_EditItem", item);
         }
 
+        public async Task<IActionResult> EditItemTranslation(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var item = await _context.Items.FindAsync(id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+            AddStatusViewData();
+            return PartialView("_EditItemTranslation", item);
+        }
+
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditItem(int id, [Bind("ItemId,CategoryId,CategoryName,ItemName,Description,PriceRange,CoverId,OriginInfo,Status,DateAdded")] Item item)
+        public async Task<IActionResult> EditItem(int id, [Bind("ItemId,CategoryId,CategoryName,CategoryNameZh,ItemName,ItemNameZh,Description,DescriptionZh,PriceRange,CoverId,CoverUrl,OriginInfo,OriginInfoZh,SoldInfo,SoldinfoZh,Status,DateAdded")] Item item)
         {
             if (id != item.ItemId)
             {
@@ -119,27 +139,25 @@ namespace HansViolinWebApp.Controllers
             return PartialView("_EditItem", item);
         }
 
-        public async Task<IActionResult> EditItemCover(int? id, int? coverId)
+        public async Task<IActionResult> EditItemCover(int? id)
         {
-            if (id == null || coverId == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
             var item = await _context.Items.FindAsync(id);
-            var image = await _context.Images.FindAsync(coverId);
-            if (item == null || image == null)
+            if (item == null)
             {
                 return NotFound();
             }
 
-            item.CoverId = coverId;
             return PartialView("_EditItemCover", item);
         }
 
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditItemCover(int id, [Bind("ItemId,CategoryId,CategoryName,ItemName,Description,PriceRange,CoverId,OriginInfo,Status,DateAdded")] Item item)
+        public async Task<IActionResult> EditItemCover(int id, [Bind("ItemId,CategoryId,CategoryName,CategoryNameZh,ItemName,ItemNameZh,Description,DescriptionZh,PriceRange,CoverId,CoverUrl,OriginInfo,OriginInfoZh,SoldInfo,SoldinfoZh,Status,DateAdded")] Item item)
         {
             if (id != item.ItemId)
             {
@@ -250,10 +268,26 @@ namespace HansViolinWebApp.Controllers
             return PartialView("_EditCategory", category);
         }
 
+        public async Task<IActionResult> EditCategoryTranslation(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var category = await _context.Categories.FindAsync(id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+            return PartialView("_EditCategoryTranslation", category);
+        }
+
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditCategory(int id, [Bind("CategoryId,CategoryName,PathName,Description,CoverUrl")] Category category)
+        public async Task<IActionResult> EditCategory(int id, [Bind("CategoryId,CategoryName,CategoryNameZh,PathName,Description,DescriptionZh,CoverUrl")] Category category)
         {
+            Console.WriteLine("id: " + id + " CategoryId: " + category.CategoryId);
             if (id != category.CategoryId)
             {
                 return NotFound();
@@ -394,10 +428,19 @@ namespace HansViolinWebApp.Controllers
             }
             return PartialView("_EditProfile", profile);
         }
+        public async Task<IActionResult> EditProfileTranslation()
+        {
+            var profile = await _context.BusinessDetails.FirstOrDefaultAsync();
+            if (profile == null)
+            {
+                return NotFound();
+            }
+            return PartialView("_EditProfileTranslation", profile);
+        }
 
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditProfile(int id, [Bind("Id,About,ImageLink,Phone,Email,Address,Postcode,Twitter,Facebook,Instagram")] BusinessDetail profile)
+        public async Task<IActionResult> EditProfile(int id, [Bind("Id,About,AboutZh,ImageLink,Phone,Email,Address,Postcode,Wechat,Twitter,Facebook,Instagram")] BusinessDetail profile)
         {
             if (id != profile.Id)
             {
@@ -438,7 +481,7 @@ namespace HansViolinWebApp.Controllers
 
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditContact(int id, [Bind("Id,About,ImageLink,Phone,Email,Address,Postcode,Twitter,Facebook,Instagram")] BusinessDetail profile)
+        public async Task<IActionResult> EditContact(int id, [Bind("Id,About,AboutZh,ImageLink,Phone,Email,Address,Postcode,Wechat,Twitter,Facebook,Instagram")] BusinessDetail profile)
         {
             if (id != profile.Id)
             {
@@ -504,7 +547,7 @@ namespace HansViolinWebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreatePost([Bind("Id,Title,Content,CreatedDate,PublishedDate,IsPublished")] News news)
+        public async Task<IActionResult> CreatePost([Bind("Id,Title,TitleZh,Content,ContentZh,CreatedDate,PublishedDate,IsPublished")] News news)
         {
             if (ModelState.IsValid)
             {
@@ -535,9 +578,28 @@ namespace HansViolinWebApp.Controllers
             return View(news);
         }
 
+        public async Task<IActionResult> EditPostTranslation(int? id)
+        {
+            News news;
+            try
+            {
+                news = await newsRepository.GetNews(id);
+            }
+            catch (NullReferenceException)
+            {
+                return NotFound();
+            }
+            if (news == null)
+            {
+                return NotFound();
+            }
+
+            return View(news);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditPost(int id, [Bind("Id,Title,Content,CreatedDate,PublishedDate,IsPublished")] News news)
+        public async Task<IActionResult> EditPost(int id, [Bind("Id,Title,TitleZh,Content,ContentZh,CreatedDate,PublishedDate,IsPublished")] News news)
         {
             if (id != news.Id)
             {
@@ -565,7 +627,7 @@ namespace HansViolinWebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdatePostStatus(int id, [Bind("Id,Title,Content,CreatedDate,PublishedDate,IsPublished")] News news)
+        public async Task<IActionResult> UpdatePostStatus(int id, [Bind("Id,Title,TitleZh,Content,ContentZh,CreatedDate,PublishedDate,IsPublished")] News news)
         {
             if (id != news.Id)
             {
@@ -629,5 +691,17 @@ namespace HansViolinWebApp.Controllers
             statusList.Add(Status.NOTABLE_SALE);
             ViewData["Status"] = new SelectList(statusList);
         }
+
+        //private void UploadImage(string imagePath)
+        //{
+        //    string uniqueFileName = null;
+        //    var uploadFolder = Path.Combine(_hostEnvironment.WebRootPath, "img");
+        //    uniqueFileName = imagePath + "_" + Guid.NewGuid().ToString();
+        //    var filePath = Path.Combine(uploadFolder, uniqueFileName);
+        //    using(var stream = new FileStream(filePath, FileMode.Create))
+        //    {
+
+        //    }
+        //}
     }
 }

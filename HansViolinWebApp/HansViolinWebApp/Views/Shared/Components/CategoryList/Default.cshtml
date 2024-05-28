@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<HansViolinWebApp.Models.Category>
 
     <div class="py-3">
-        <div class="text-center" style="color:red"><strong>**Please create in the order you want to display! We don't have the function to swap the order yet!**</strong></div>
-        <div class="text-center"><strong>Main Web Display Order:</strong> Categories - Ascending &#8195; Instruments - Descending &#8195; Images - Ascending</div>
-        <div class="text-center"><strong>Instrument Status colour:</strong> Active - Purple &#8195; Notable Sales - Red &#8195; Draft - Gray</div>
+        <div class="text-center" style="color:red"><strong>请按照展示顺序添加新分类</strong></div>
+        <div class="text-center"><strong>主网页展示顺序:</strong> Categories - 最早创建的显示在菜单最上面 &#8195; Instruments - 最新创建的显示在前 &#8195; Images - 最早创建的显示在前</div>
+        <div class="text-center"><strong>乐器左竖条颜色含义:</strong> Active - Purple &#8195; Notable Sales - Red &#8195; Draft - Gray</div>
     </div>
 
 <button type="button" class="btn-secondary big-button" data-toggle="ajax-modal" data-target="#addCategory"
@@ -19,16 +19,20 @@
                 <div class="container-title">
                     <img class="header-image" src=@category.CoverUrl />
                     <button class="btn btn-link admin-card-header" type="button" data-toggle="collapse" data-target="#category-@category.CategoryId" aria-expanded="false" aria-controls="category-@category.CategoryId">
-                        @category.CategoryName
+                        @category.CategoryName  @category.CategoryNameZh
                     </button>
                     <div class="container-action">
+                        <button type="button" class="btn-small" data-toggle="ajax-modal" data-target="#editCategoryTranslation"
+                                data-url="@Url.Action($"EditCategoryTranslation/{category.CategoryId}")">
+                            翻译
+                        </button>
                         <button type="button" class="btn-small" data-toggle="ajax-modal" data-target="#editCategory"
                                 data-url="@Url.Action($"EditCategory/{category.CategoryId}")">
-                            Edit
+                            编辑
                         </button>
                         <button type="button" class="btn-small" data-toggle="ajax-modal" data-target="#deleteCategory"
                                 data-url="@Url.Action($"DeleteCategory/{category.CategoryId}")">
-                            Delete
+                            删除
                         </button>
                     </div>
                 </div>
@@ -37,7 +41,10 @@
             <div id="category-@category.CategoryId" class="collapse show" aria-labelledby="@category.CategoryName" data-parent="#categoryList">
                 <div class="card-body">
                     <div class="category-container">
-                        <div class="admin-sub-container newline-wrapper">@category.Description</div>
+                        <div class="admin-sub-container newline-wrapper">
+                            <div>@category.Description</div>
+                            <div>@category.DescriptionZh</div>
+                        </div>
                         @await Component.InvokeAsync("ItemList", category.CategoryId)
                     </div>
                 </div>

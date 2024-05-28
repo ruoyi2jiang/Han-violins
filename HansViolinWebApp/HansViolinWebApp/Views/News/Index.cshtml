@@ -1,16 +1,20 @@
-﻿@model IEnumerable<HansViolinWebApp.Models.News>
+﻿@using Microsoft.AspNetCore.Localization
+@using HansViolinWebApp.Resources
+
+@inject LocalizationService Localizer
+@model IEnumerable<HansViolinWebApp.Models.News>
 
 @{
-    ViewData["Title"] = "News";
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    ViewData["Title"] = Localizer.Localize("news");
+    Layout = "~/Views/Shared/_InnerLayout.cshtml";
 }
-
-<div id="header-bg" class="header-visible"></div>
 
 <section id="news-manager">
     <div class=" container mb-5 title-padding">
         <div class="mb-3" data-aos="fade-up">
             <div class="title">
-                <h2>News</h2>
+                <h2>@Localizer.Localize("news")</h2>
                 <hr />
             </div>
         </div>
@@ -18,24 +22,39 @@
             <div class="my-3 text-center">
                 @if (Model.Count() == 0)
                 {
-                    <p>No post available</p>
+                    <p>@Localizer.Localize("no-post")</p>
                 }
             </div>
             @foreach (var post in Model)
             {
                 <div class="row">
                     <div class="d-flex col-lg-12 my-3">
-                        @if (post.PublishedDate!=null)
+                        @if (post.PublishedDate != null)
                         {
-                            <div class="col-lg-3 news-time">@post.PublishedDate.Value.Date.ToString("dd MMM yyyy")</div>
+                            if (requestCulture.RequestCulture.Culture.Name == "zh")
+                            {
+                                <div class="col-lg-3 news-time">@post.PublishedDate.Value.Date.ToString("D")</div>
+
+                            }
+                            else
+                            {
+                                <div class="col-lg-3 news-time">@post.PublishedDate.Value.Date.ToString("dd MMM yyyy")</div>
+                            }
                         }
                         else
                         {
-                            <div class="col-lg-3 news-time" style="color:red">Published date error!!</div>
+                            <div class="col-lg-3 news-time" style="color:red">@Localizer.Localize("error")</div>
                         }
-                        <div class="col-lg-9 news-list">
+                    <div class="col-lg-9 news-list">
+                        @if (requestCulture.RequestCulture.Culture.Name == "zh")
+                        {
+                            <a asp-area="" asp-controller="news" asp-action="GetNews" asp-route-id="@post.Id">@post.TitleZh</a>
+                        }
+                        else
+                        {
                             <a asp-area="" asp-controller="news" asp-action="GetNews" asp-route-id="@post.Id">@post.Title</a>
-                        </div>
+                        }
+                    </div>
                     </div>
                 </div>
             }

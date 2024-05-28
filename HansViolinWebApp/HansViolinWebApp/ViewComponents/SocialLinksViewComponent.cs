@@ -16,7 +16,12 @@ namespace HansViolinWebApp.ViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View(await _context.BusinessDetails.FirstOrDefaultAsync());
+            var profile = await _context.BusinessDetails.FirstOrDefaultAsync();
+            if(profile == null)
+            {
+                profile = new BusinessDetail();
+            }
+            return View(profile);
         }
     }
 }

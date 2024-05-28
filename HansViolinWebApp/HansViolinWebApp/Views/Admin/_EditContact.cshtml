@@ -14,6 +14,7 @@
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <input type="hidden" asp-for="Id" />
                             <input type="hidden" asp-for="About" />
+                            <input type="hidden" asp-for="AboutZh" />
                             <input type="hidden" asp-for="ImageLink" />
                             <div class="form-group">
                                 <label asp-for="Phone" class="control-label"></label>
@@ -34,6 +35,11 @@
                                 <label asp-for="Postcode" class="control-label"></label>
                                 <input asp-for="Postcode" class="form-control" />
                                 <span asp-validation-for="Postcode" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Wechat" class="control-label"></label>
+                                <input asp-for="Wechat" class="form-control" />
+                                <span asp-validation-for="Wechat" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="Twitter" class="control-label"></label>

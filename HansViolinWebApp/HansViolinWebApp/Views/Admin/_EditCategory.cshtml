@@ -9,18 +9,17 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <form asp-action="EditCategory"  id="form-content">
+                        <form asp-action="EditCategory" id="form-content">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <input type="hidden" asp-for="CategoryId" />
+                            <input type="hidden" asp-for="CategoryNameZh" />
+                            <input type="hidden" asp-for="DescriptionZh" />
+                            <input type="hidden" asp-for="PathName" />
+
                             <div class="form-group">
-                                <label asp-for="CategoryName" class="control-label" >Name*</label>
+                                <label asp-for="CategoryName" class="control-label">Name*</label>
                                 <input asp-for="CategoryName" class="form-control" />
                                 <span asp-validation-for="CategoryName" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="PathName" class="control-label">Url Path (Make sure to update item to match this path)*</label>
-                                <input asp-for="PathName" class="form-control" />
-                                <span asp-validation-for="PathName" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="Description" class="control-label"></label>

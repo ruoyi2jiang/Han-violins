@@ -1,25 +1,37 @@
-﻿@model HansViolinWebApp.Models.BusinessDetail
+﻿@using Microsoft.AspNetCore.Localization
+@using HansViolinWebApp.Resources
+
+@inject LocalizationService Localizer
+@model HansViolinWebApp.Models.BusinessDetail
 
 @{
-    ViewData["Title"] = "About";
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    ViewData["Title"] = Localizer.Localize("about");
     var sanitizer = new Ganss.XSS.HtmlSanitizer();
+    Layout = "~/Views/Shared/_InnerLayout.cshtml";
 }
 
-<div id="header-bg" class="header-visible"></div>
 
 <section id="about" class="title-padding">
     <div class="container mb-5">
-        <div  data-aos="fade-up">
+        <div data-aos="fade-up">
             <div class="title">
-                <h2>About Us</h2>
+                <h2>@Localizer.Localize("about-us")</h2>
             </div>
         </div>
         <div class="mb-3" data-aos="fade-up" data-aos-delay="100">
-            <img src=@Model.ImageLink class="w-100"/>
+            <img src=@Model.ImageLink class="w-100" />
         </div>
-        <div  data-aos="fade-up" data-aos-delay="200">
+        <div data-aos="fade-up" data-aos-delay="200">
             <div class="mb-3">
-                @Html.Raw(sanitizer.Sanitize(Model.About))
+                @if (requestCulture.RequestCulture.Culture.Name == "zh")
+                {
+                    @Html.Raw(sanitizer.Sanitize(Model.AboutZh))
+                }
+                else
+                {
+                    @Html.Raw(sanitizer.Sanitize(Model.About))
+                }
             </div>
 
         </div>

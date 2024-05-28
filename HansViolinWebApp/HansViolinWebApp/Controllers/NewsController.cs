@@ -34,7 +34,7 @@ namespace HansViolinWebApp.Controllers
             {
                 return NotFound();
             }
-            if(news == null)
+            if(news == null || !news.IsPublished)
             {
                 return NotFound();
             }

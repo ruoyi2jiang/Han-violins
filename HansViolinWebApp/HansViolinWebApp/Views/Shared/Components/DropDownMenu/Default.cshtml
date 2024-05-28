@@ -1,8 +1,24 @@
-﻿@model IEnumerable<HansViolinWebApp.Models.Category>
+﻿@using Microsoft.AspNetCore.Localization
+
+@model IEnumerable<HansViolinWebApp.Models.Category>
+
+@{ 
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+}
 
     <ul>
         @foreach (var category in Model)
         {
-            <li><a asp-controller="instruments" asp-action="categorize" asp-route-pathName=@category.PathName>@category.CategoryName</a></li>
+           
+        <li>
+            @if (requestCulture.RequestCulture.Culture.Name == "zh")
+            {
+                <a asp-controller="instruments" asp-action="categorize" asp-route-pathName=@category.PathName>@category.CategoryNameZh</a>
+            }
+            else
+            {
+                <a asp-controller="instruments" asp-action="categorize" asp-route-pathName=@category.PathName>@category.CategoryName</a>
+            }
+        </li>
         }
     </ul>

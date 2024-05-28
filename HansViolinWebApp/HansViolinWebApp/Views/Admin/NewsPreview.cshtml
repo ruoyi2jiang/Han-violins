@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "News Preview";
+    Layout = "~/Views/Shared/_admLayout.cshtml";
     var sanitizer = new Ganss.XSS.HtmlSanitizer();
     sanitizer.AllowedCssProperties.Add("flex-wrap");
     sanitizer.AllowedCssProperties.Add("justify-content");
@@ -16,6 +17,9 @@
         <div class="d-flex justify-content-center">
             <span class="mr-1">
                 <a asp-action="EditPost" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
+            </span>
+            <span class="mr-1">
+                <a asp-action="EditPostTranslation" asp-route-id="@Model.Id" class="btn btn-secondary">翻译</a>
             </span>
             <form asp-action="DeletePost">
                 <input type="hidden" asp-for="Id" />
@@ -41,6 +45,19 @@
                 @Html.Raw(sanitizer.Sanitize(Model.Content))
             </div>
         </div>
+        <div class="title mt-5">
+            <h3>@Model.TitleZh</h3>
+            <hr />
+        </div>
+        <div class="mb-5 addition-info">
+            @date.Value.Date.ToString("D") @status
+        </div>
+        <div>
+            <div class="news-content mb-5">
+                @Html.Raw(sanitizer.Sanitize(Model.ContentZh))
+            </div>
+        </div>
+
     </div>
     
 </div>
