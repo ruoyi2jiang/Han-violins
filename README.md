@@ -1,6 +1,6 @@
-# han-violins
+# Instrument website with admin control
 
-A simple ASP .NET Core MVC violin vendor promo web app which I worked on for a client. They didn't make use of it therefore archiving the skeloton code base in my Github. 
+An ASP .NET Core MVC violin vendor promo web app with simple admin control. Archive the skeloton code base in my Github. 
 
 ### Pages
 - Home
